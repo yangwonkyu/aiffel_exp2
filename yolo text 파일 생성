@@ -1,0 +1,31 @@
+import os
+
+# 이미지 경로 가져오기
+image_folder1 = "/content/drive/MyDrive/vkitti_kitti_train/kitti/train"
+val_image_folder1 = "/content/drive/MyDrive/vkitti_kitti_train/kitti/val"
+
+image_folder2 = "/content/drive/MyDrive/vkitti_kitti_train/vkitti/train"
+val_image_folder2 = "/content/drive/MyDrive/vkitti_kitti_train/vkitti/val"
+
+# 각 폴더에서 이미지 경로 가져오기
+train_images1 = [os.path.join(image_folder1, f) for f in os.listdir(image_folder1) if f.endswith(('.png'))]
+val_images1 = [os.path.join(val_image_folder1, f) for f in os.listdir(val_image_folder1) if f.endswith(('.png'))]
+
+train_images2 = [os.path.join(image_folder2, f) for f in os.listdir(image_folder2) if f.endswith(('.png'))]
+val_images2 = [os.path.join(val_image_folder2, f) for f in os.listdir(val_image_folder2) if f.endswith(('.png'))]
+
+# 두 경로 리스트를 결합
+train_images = train_images1 + train_images2
+val_images = val_images1 + val_images2
+
+# train.txt에 저장
+with open("/content/drive/MyDrive/vkitti_kitti_train/train.txt", "w") as file:
+    for path in train_images:
+        file.write(path + "\n")
+
+# val.txt에 저장
+with open("/content/drive/MyDrive/vkitti_kitti_train/val.txt", "w") as file:
+    for path in val_images:
+        file.write(path + "\n")
+
+print("train.txt and val.txt files have been created.")
